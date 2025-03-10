@@ -4,8 +4,6 @@ import org.springframework.boot.autoconfigure.pulsar.PulsarProperties.Transactio
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import com.example.transacoes_banco_api.exception.UnauthorizedTransactionException;
-
 @Service
 public class AuthorizeService {
     public RestClient restClient;

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.transacoes_banco_api.authorization.AuthorizeService;
-import com.example.transacoes_banco_api.exception.InvalidTransactionException;
+import com.example.transacoes_banco_api.notification.NotificationService;
 import com.example.transacoes_banco_api.wallet.Wallet;
 import com.example.transacoes_banco_api.wallet.WalletRepository;
 import com.example.transacoes_banco_api.wallet.WalletType;
@@ -14,11 +14,13 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final WalletRepository walletRepository;
     private final AuthorizeService authorizeService;
+    private final NotificationService notificationService;
 
-    public TransactionService(TransactionRepository transactionRepository, WalletRepository walletRepository, AuthorizeService authorizeService) {
+    public TransactionService(TransactionRepository transactionRepository, WalletRepository walletRepository, AuthorizeService authorizeService, NotificationService notificationService) {
         this.transactionRepository = transactionRepository;
         this.walletRepository = walletRepository;
         this.authorizeService = authorizeService;
+        this.notificationService = notificationService;
     }
 
     @Transactional
@@ -32,7 +34,8 @@ public class TransactionService {
         walletRepository.save(wallet.debit(transaction.value()));
         //4 - chamar servicos externos
         authorizeService.authorize(transaction);
-        //5 - adicionar valor na carteira
+        //5 - notificar
+        notificationService.notify(transaction);
         return newTransaction;
     }
         
