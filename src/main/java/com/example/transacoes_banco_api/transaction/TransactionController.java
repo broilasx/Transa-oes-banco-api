@@ -2,8 +2,6 @@ package com.example.transacoes_banco_api.transaction;
 
 import java.util.List;
 
-import javax.xml.crypto.dsig.TransformService;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

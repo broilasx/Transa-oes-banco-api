@@ -1,6 +1,6 @@
 package com.example.transacoes_banco_api.notification;
 
-import org.springframework.boot.autoconfigure.pulsar.PulsarProperties.Transaction;
+import com.example.transacoes_banco_api.transaction.Transaction;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
